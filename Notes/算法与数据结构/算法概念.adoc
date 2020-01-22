@@ -1,0 +1,22 @@
+== 算法概念
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate}
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: ../images
+:icons: font
+// enable UI
+:experimental:
+
+=== 时间复杂度
+
+时间复杂度用来衡量算法的运行时间。
+
+=== 空间复杂度
+
+空间复杂度用来衡量算法运行占用的内存空间。
+
+
+

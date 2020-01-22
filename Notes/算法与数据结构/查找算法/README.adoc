@@ -1,0 +1,12 @@
+== 查找算法
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate} 
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: ../images
+:icons: font
+// enable UI
+:experimental:
+

@@ -1,0 +1,49 @@
+:plantuml-server-url: https://www.plantuml.com/plantuml
+= AsciiDoc使用指南
+Pinnsvin 
+v1.0 2019-06-05
+:imagesdir: imgs
+// set url
+:url-asciidoc: http://asciidoc.org
+:url-asciidoc-github: https://github.com/asciidoc/asciidoc
+:link-asciidoc: link:{url-asciidoc}[Asciidoc]
+:link-asciidoc-github: link:{url-asciidoc-github}[Asciidoc@GitHub]
+:link-asciidoctor: link:https://asciidoctor.org[Asciidoctor]
+:link-asciidoctor-cn: link:https://asciidoctor.cn[Asciidoctor中文站]
+
+== 前言
+在此之前一直使用Markdown，但是在使用Markdown的过程中，总是会遇到一些问题，在应对一些复杂的格式要求的时候并不能满足要求；其次，没有统一的标准，在使用的过程中总是会遇到各种问题，解决这些问题会浪费一些额外的时间。在Spring的文档中看到了``.adoc``这种格式的文档，由此便开始了解到了``Asciidoc``。
+
+.官方描述
+[quote, {url-asciidoc}]
+AsciiDoc is a text document format for writing notes, documentation, articles, books, slideshows, man pages & blogs. AsciiDoc can be translated to many formats including HTML, DocBook, PDF, EPUB, and man pages.
+
+{link-asciidoc}上提供了使用``python2``编写的转换工具，并托管到Github上。但是在{link-asciidoc-github}提示说这个项目将在2020年停止维护。
+[quote]
+This implementation is written in Python 2, which EOLs in Jan 2020. AsciiDoc development is being continued under @asciidoctor.
+
+这里提到了**Asciidoctor**，作为后续的支持版本，我选择这个工具。Asciidoctor使用``ruby``编写。在{link-asciidoctor}或者{link-asciidoctor-cn}详细了解。
+
+== 安装配置
+
+在实际使用过程中，我发现安装配置才是比较困难的，语法什么的可以通过查阅官网参考语法快速了解。
+
+但是使用的过程中总是有一些意外发生，比如导出pdf。为了在以后的使用中更加顺畅，此部分比较重要。
+
+=== 在vscode中配置
+
+安装 AsciiDoc 插件。
+
+image::2-11-2019-11-10-24-AM.png[] 
+
+
+=== 在idea中配置
+
+
+
+== 语法
+
+=== 标题
+
+使用``=``来标记，
+

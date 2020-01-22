@@ -1,0 +1,20 @@
+= freeplane 模板
+Pinnsvin <Pinnsvin@163.com>
+v 1.0
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:doctype: article
+// this value are auto(default), left, right
+:toc: 
+// add font-awesome
+:icons: font
+// cannel noheader default is off
+// :noheader:
+// cannel footer
+:nofooter:
+// paths
+:imagesdir: images
+:iconsdir: ./icons
+// :stylesdir: ./styles
+// {doctitle} {author} {firstname} {lastname} {middlename} {authorinitials}姓名缩写, {email}
+
+image::气泡-dark.jpg[]

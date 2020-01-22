@@ -1,0 +1,18 @@
+=== 插入排序
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate} 
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: ../images
+:icons: font
+// enable UI
+:experimental:
+
+==== 原理
+
+image::演示动画/插入排序.gif[]
+
+==== source
+

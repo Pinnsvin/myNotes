@@ -1,0 +1,21 @@
+== Java8
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate}
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: images
+// enable font awesome
+:icons: font
+// enable UI
+:experimental:
+
+- 函数式接口就是只定义一个抽象方法的接口。
+- @FunctionalInterface用于表示该接口会设计成一个函数式接口,不是必需的，但对于为此设计的接口而言，使用它是比较好的做法。
+- Lambda表达式理解为简洁地表示可传递的匿名函数的一种方式：它没有名称，但它
+有参数列表、函数主体、返回类型，可能还有一个可以抛出的异常列表。
+- 函数式接口的抽象方法的签名基本上就是Lambda表达式的签名。我们将这种抽象方法叫作
+函数描述符。
+- Lambda表达式允许你直接内联，为函数式接口的抽象方法提供实现，并且将整个表达式作为函数式接口的一个实例。
+

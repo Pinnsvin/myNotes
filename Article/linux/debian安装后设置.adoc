@@ -1,0 +1,403 @@
+= debian 安装后设置
+Pinnsvin
+v 1.0
+:imagesdir: static/image
+
+== 更新系统
+
+更新系统 + 移除无用软件包。
+....
+sudo apt-get update && sudo apt-get upgrade && sudo apt autoremove -y
+....
+
+== 删除系统自带软件
+
+- amazon
+
+最小安装不包含``unity-webapps-common``包。##貌似没用，还是去软件中心手动删除。##
+....
+sudo apt autoremove --purge unity-webapps-common && sudo rm -rf /usr/share/applications/ubuntu-amazon-default.desktop
+....
+
+- 游戏们
+
+....
+sudo apt autoremove --purge aisleriot gnome-mines gnome-sudoku gnome-mahjongg -y
+....
+
+- libreoffice
+
+....
+sudo apt autoremove --purge libreoffice* -y
+....
+
+- rhythmbox
+....
+sudo apt autoremove --purge rhythmbox -y
+....
+
+=== 汇总命令
+
+....
+sudo apt autoremove --purge aisleriot gnome-mines gnome-sudoku gnome-mahjongg libreoffice* rhythmbox -y 
+....
+
+
+....
+sudo apt autoremove --purge kasumi gnome-taquin gnome-klotski gnome-tetravex gnome-chess gnome-mines gnome-sudoku gnome-robots gnome-nibbles gnome-mahjongg hitori mlterm* rhythmbox* scim* xiterm+thai xterm quadrapassel lightsoff four-in-a-row tali swell-foop five-or-more  hdate-applet mozc-*  gnome-dictionary  evolution icedove-l10n-ja  imagemagick inkscape libreoffice* aisleriot  khmerconverter -y
+....
+
+== 一般设置
+
+- home下的文件夹名称修改为英文
+
+====
+只能修改为系统默认的（首字母大写），想改小写需要修改``~/.config/user-dirs.dirs``文件内容。
+....
+export LANG=en_US
+xdg-user-dirs-gtk-update
+....
+====
+
+- sudo 不在sudoers文件中
+====
+在``/etc/sudoers``文件中``root``行下增加一行。
+
+# gedit /ect/sudoers
+....
+username	ALL=(ALL:ALL) ALL
+....
+====
+
+- TAB不能自动补全
+====
+....
+sudo apt-get install bash_completion -y
+....
+注销重新登录。
+====
+
+== 桌面设置
+
+- gnome-tweak-tool 
+....
+sudo apt-get install gnome-tweak-tool  -y
+....
+
+访问 https://extensions.gnome.org[gnome 拓展] 网站，提示下载浏览器插件，Firefox安装完插件之后，系统安装``chrome-gnome-shell``
+
+....
+sudo apt-get install chrome-gnome-shell -y
+....
+
+推荐下边这些插件，之前在debian上用，还有一些安装失败。
+
+|===
+|拓展名称 |描述
+
+|Applications menu | 在右上角点击 *应用程序* 有一个程序列表
+|Coverflow alt-tab | ctrl + alt 3D切换效果
+|dash to dock | 移动dock位置，配置dock等，必备
+|dash to panel | 底部任务栏，不太喜欢
+| dynamic top bar | 使顶部的任务栏透明
+|hide top bar | 自动隐藏顶部的任务栏
+|netspeed | 在顶部的任务栏显示网速
+|no title bar | 去掉系统窗口的标题
+|user themes | 支持用户主题
+|topicon plus | 顶部后台程序状态栏配置，debian10没了左下角的后台抽屉，使用这个。
+|===
+
+- 使桌面变得更好看些
+
+通过gnome的主题更改图标、shell等，使系统更好看。
+
+https://www.gnome-look.org/ 上边有一些gnome的主题、图标等。并且提供了一键安装的脚本程序``ocs-url``，通过它能非常容易的下载配置gnome。
+
+可以在 https://www.pling.com/p/1136805/ 上获取到该程序。
+
+上图，上图
+
+image::screenshot1.png[]
+image::screenshot2.png[]
+image::screenshot3.png[]
+
+- 修改grub引导背景图
+
+todo
+
+- 改变图标大小
+
+_gnome3.2之后没有gnome-shell.css文件了，所以我没有调整图标大小_
+
+编辑``gnome-shell/gnome-shell.css``，搜索 ##icon-grid##，编辑如下的内容：
+
+....
+/* App Vault/Grid */
+.icon-grid {
+  spacing: 30px;
+  -shell-grid-horizontal-item-size: 136px; // 水平间距
+  -shell-grid-vertical-item-size: 136px; // 垂直间距
+  }
+  .icon-grid .overview-icon {
+    icon-size: 96px; // 图标大小
+    }
+....
+
+
+== 常用软件
+
+- 搜狗输入法
+
+====
+需要安装fcitx。
+....
+sudo apt-get install fcitx fcitx-table -y
+....
+
+....
+sudo dpkg -i sogou*.deb -y
+
+sudo apt-get install libqt4-declarative # 执行sogou-qimpanel显示缺libqtdeclarative.so.4 no such file，安装这个
+....
+
+安装完成后可能会出现，不能切换输入法的情况，安装``fcitx-ui-classic``之后就可以了。
+
+缺失依赖，提示用``sudo apt --fix-broken install``修复，修复之后卸载重新安装，期间可能在fcitx配置输入法列表里没有**搜狗输入法**，重启下系统，没试过注销。
+
+搜狗皮肤推荐 https://pinyin.sogou.com/skins/detail/view/info/513927?rf=cate_31_sign&tf=w:[【竹子】win10_blue]， 安装之后由于候选词底纹会出现候选词亮度太低，可以在搜狗中设置下：设置--外观--皮肤设置--更换颜色--下拉选择FirstCandColor，颜色设置为黑色就可以了。
+
+https://pinyin.sogou.com/skins/detail/view/info/608391?rf=cate_31_sign&tf=p[mac样式] 这个皮肤也不错。
+
+image::201909282106.png[]
+
+这样我就不需要自带的ibus输入法了，卸载了。
+....
+sudo apt autoremove --purge ibus -y
+....
+====
+
+- flameshot
+
+====
+该软件在github上开源，目前收录在ubuntu18.04和debian10软件包中，与Snipaste类似，不过Snipaste目前linux版本还没有发布，就用这个。
+
+截图命令``flameshot gui``，通过设置快捷键也可以像snipaste一样方便截图。
+
+....
+sudo apt-get install flameshot -y
+....
+====
+
+- qbittorrent
+
+====
+....
+sudo apt-get install qbittorrent -y
+....
+
+添加tracker
+
+link:https://github.com/ngosang/trackerslist[tackerslist] 上收录了一些好用的tracker列表，长期更新，通过配置tracker，有些资源的下载速度比迅雷快很多。
+
+工具-首选项-bittorrent 最下方勾选“自动添加以下trackers”到新的torrent。填写github上复制的连接即可。
+====
+
+- thunderbird
+
+====
+....
+sudo apt-get install thunderbird thunderbird-l10n-zh-cn -y
+....
+====
+
+- chromium 
+
+====
+chrome 太占内存了，试试chromium，想要同步google账户，需要在设置里勾选**允许登录 Chromium**
+
+....
+sudo apt-get install chromium chromium-l10n -y
+....
+====
+
+- vlc
+
+====
+....
+sudo apt-get install vlc -y
+....
+====
+
+- 深度录屏
+
+====
+debian10 的官方包里包含deepin的几款软件，可以在软件中心里去下载。
+
+....
+sudo apt-get install deepin-screen-recorder -y
+....
+====
+
+- nomacs 
+
+====
+图片查看，简单编辑，类似windows上的画图软件，满足基本的图片修改。
+
+....
+sudo apt-get install nomacs -y
+....
+====
+
+- freeplane
+
+====
+思维导图工具。
+
+....
+sudo apt-get install freeplane -y
+....
+====
+
+- 其他软件
+
+====
+. electron-ssr ssr代理工具
+. wps
+. 
+====
+
+== 系统硬件
+
+NVIDIA显卡驱动，一条命令即可。
+
+....
+sudo apt install nvidia-settings
+....
+
+== 开发环境及工具
+
+- vscode
+
+- openjdk
+
+- StarUml
+
+====
+破解：
+
+1 安装nodejs ``sudo apt-get install nodejs``
+
+2 安装yarn 
+....
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install yarn
+
+# 配置环境变量，编辑~/.profile,添加两条内容：
+export PATH="$PATH:/opt/yarn-[version]/bin"
+export PATH="$PATH:`yarn global bin`"
+source ~/.profile
+....
+
+3 安装asar
+
+....
+sudo yarn global add asar
+....
+
+4 解压StarUml
+
+....
+chmod +x StarUML-3.1.0-x86_64.AppImage
+./StarUML-3.1.0-x86_64.AppImage --appimage-extract
+....
+
+5 解压授权文件
+
+....
+cd squashfs-root/resources/
+asar extract app.asar app
+....
+
+6 修改授权文件
+
+....
+vim app/src/engine/license-manager.js
+
+checkLicenseValidity () {
+    this.validate().then(() => {
+      setStatus(this, true)
+    }, () => {
+      // 原来的代码：
+      // setStatus(this, false) 
+      // UnregisteredDialog.showDialog()
+      //修改后的代码
+      setStatus(this, true)
+    })
+  }
+....
+
+7 打包授权文件
+
+....
+asar pack app app.asar
+....
+
+8 打包appleimage
+
+....
+cd ~/Programe/AppImageKit
+wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+chmod a+x appimagetool-x86_64.AppImage
+
+./appimagetool-x86_64.AppImage squashfs-root 
+....
+
+启动报错：
+
+The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I'm aborting now. You need to make sure that /tmp/.mount_StarUM76dHcL/chrome-sandbox is owned by root and has mode 4755.
+
+修复：
+
+....
+sudo sysctl kernel.unprivileged_userns_clone=1
+....
+====
+
+- mariaDB
+
+====
+安装之后默认没有密码，但是需要使用root权限去登录。普通用户登录会出现鉴权不通过的错误。可通过设置root密码，普通用户再去登录，或者创建一个普通用户的账户。
+
+[source,bash]
+....
+sudo apt-get install mariadb-server
+
+sudo systemctl start mariadb 
+....
+====
+
+- openSystemArchitect
+
+====
+数据库设计软件。
+
+[source,bash]
+....
+wget https://www.codebydesign.com/SystemArchitect/downloads/SystemArchitect-4.0.1-linux-x86-64bit.tar.gz
+tar -xf SystemArchitect-4.0.1-linux-x86-64bit.tar.gz
+sudo apt-get install unixodbc -y
+....
+====
+
+- dbeaver
+
+====
+DBMS
+
+[source,bash]
+....
+wget https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
+sudo dpkg -i dbeaver-ce_latest_amd64.deb
+....
+====

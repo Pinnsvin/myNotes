@@ -1,0 +1,26 @@
+=== 冒泡排序
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate} 
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: ../images
+:icons: font
+// enable UI
+:experimental:
+:sourcedir: ../source
+
+==== 原理
+
+相邻两个元素比较，交换位置。
+
+NOTE: 双向冒泡排序是通过遍历次数的奇偶值限定该次遍历中升序或者降序，直到遍历奇偶遍历次数指针相遇。
+
+==== source
+
+[source, java]
+----
+include::{sourcedir}/BubbleSorting.java[]
+----
+

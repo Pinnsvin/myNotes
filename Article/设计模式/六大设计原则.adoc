@@ -1,0 +1,62 @@
+= 设计模式: 六大设计原则
+Pinnsvin <Pinnsvin@163.com>
+v 1.0
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:doctype: article
+// this value are auto(default), left, right
+:toc: 
+// add font-awesome
+:icons: font
+// cannel noheader default is off
+// :noheader:
+// cannel footer
+:nofooter:
+// paths
+:imagesdir: ./images
+:iconsdir: ./icons
+// :stylesdir: ./styles
+// {doctitle} {author} {firstname} {lastname} {middlename} {authorinitials}姓名缩写, {email}
+
+== 开闭原则
+
+IMPORTANT: *开闭原则* 的英文名称是。其定义是：
+
+== 单一职责原则
+
+IMPORTANT: **单一职责原则**的英文名称是Single Responsibility Principle，简称是SRP。其定义： 应该**有且仅有一个原因引起类的变更**。
+
+=== 例子
+[plantuml, diagram-classes, png]
+....
+interface IConnectionManager{
+    public void dial(String phoneNumber);
+    public void hangup();
+}
+
+interface IDataTransfer{
+    public Data transfer(IConnectionManager cm);
+}
+
+class Phone
+
+IDataTransfer ..> IConnectionManager
+Phone ..^ IConnectionManager
+Phone ..^ IDataTransfer
+....
+
+=== 优点
+
+- 类的复杂性降低，实现什么职责都有清晰明确的定义；
+- 可读性提高，复杂性降低，那当然可读性提高了；
+- 可维护性提高，可读性提高，那当然更容易维护了；
+- 变更引起的风险降低，变更是必不可少的，如果接口的单一职责做得好，一个接口修改只对相应的实现类有影响，对其他的接口无影响，这对系统的扩展性、维护性都有非常大的帮助。
+
+
+
+== 里氏替换原则
+
+== 依赖倒置原则
+
+== 接口隔离原则
+
+== 迪米特法则

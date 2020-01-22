@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+        function btClick(obj) {
+            with(obj){
+                console.log(obj);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="profile_block">
+        昵称：<a href="https://home.cnblogs.com/u/pinnsvin/">Pinnsvin</a><br>
+        园龄：<a href="https://home.cnblogs.com/u/pinnsvin/" title="入园时间：2015-11-02">2年4个月</a><br>
+        粉丝：<a href="https://home.cnblogs.com/u/pinnsvin/followers/">10</a><br>
+        关注：<a href="https://home.cnblogs.com/u/pinnsvin/followees/">4</a>
+    </div>
+    <div id="my_area">
+        Link：<a href="https://github.com/Pinnsvin/" style="height: 40px; font-size: 18px;">Github</a>
+        <p>打赏</p>
+        <p style="text-align: center"><img src="http://img-blog.csdn.net/20180313164725486" alt="打赏我吧" style="width: 230px"></p>
+    </div>
+    <div class="">
+        <button type="button" name="button" id="my_btn" onclick="btClick('my_btn');">Button</button>
+    </div>
+
+</body>
+
+</html>

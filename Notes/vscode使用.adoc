@@ -1,0 +1,57 @@
+== vscode 使用
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate}
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: images
+// enable font awesome
+:icons: font
+// enable UI
+:experimental:
+
+=== 使用用户自定义代码片段
+
+左上角选择 menu:文件[首选项 > 用户代码片段]. 
+
+选择``asciidoc``，会自动生成``asciidoc.json``文件，该文件位于``C:\Users\xxx\AppData\Roaming\Code\User\snippets``。
+
+编辑``asciidoc.json``，例如：
+
+[source,json,attributes]
+----
+"template": {
+		"prefix": "dtem",
+		"body": [
+			"== $1",
+			"author <author@github.com>",
+			"v1.0 {docdate}",
+			"",
+			":plantuml-server-url: https://www.plantuml.com/plantuml",
+			":toc: ",
+			":doctype: article",
+			":imagesdir: images",
+			"// enable font awesome",
+			":icons: font",
+			"// enable UI",
+			":experimental:\n",
+			"$2"
+		],
+		"description": "default template"
+	}
+----
+
+kbd:[Ctrl+,] 打开设置，编辑``settings.json``，*开启智能提示*
+
+[source,json,attributes]
+----
+"[asciidoc]": {
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": false
+        }
+    }
+----
+

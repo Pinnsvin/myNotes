@@ -1,0 +1,17 @@
+== 排序算法
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate} 
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: ../images
+:icons: font
+// enable UI
+:experimental:
+
+include::冒泡排序.adoc[]
+
+include::插入排序.adoc[]
+
+include::归并排序.adoc[]
