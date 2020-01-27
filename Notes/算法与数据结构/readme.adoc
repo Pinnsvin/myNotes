@@ -1,0 +1,19 @@
+= 算法和数据结构
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate}
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:doctype: 
+:toc:
+// default: empty
+:imagesdir: ./images
+// default: ./images/icons
+:iconsdir: ./icons
+// default: ./stylesheets
+// :stylesdir: ./styles
+:icons: font
+:readme: README.adoc
+
+include::算法概念.adoc[]
+
+include::排序算法/{readme}[]
+
