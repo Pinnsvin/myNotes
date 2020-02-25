@@ -1,0 +1,110 @@
+= Asciidoctor-pdf生成pdf文件
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate}
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: ../images
+// enable font awesome
+:icons: font
+// enable UI
+:experimental:
+:source-highlighter: rouge
+:idprefix: id_
+
+== 简述
+``asciidoctor-pdf``是Asciidoctor一个使用Prawn将asciidoc文档转换成pdf的插件，由Asciidoctor组织开发维护，托管在 link:https://github.com/asciidoctor/asciidoctor-pdf[GitHub] 上，本文将简单介绍下这个插件的使用，部分内容来源于官方。
+
+== 安装
+
+.使用gem安装
+....
+$ gem install asciidoctor-pdf
+....
+
+.语法高亮支持
+
+Rouge (preferred, minimum version: 2.0.0)
+....
+$ gem install rouge
+....
+
+Pygments
+....
+$ gem install pygments.rb
+....
+
+CodeRay
+....
+$ gem install coderay
+....
+
+启用语法高亮，只需要在``.adoc``文档头部填写如下内容即可：
+....
+:source-highlighter: rouge
+....
+
+== 使用
+
+基本命令，转换asciidoc成为pdf
+....
+$ asciidoctor-pdf basic-example.adoc
+$ # 这两个命令是等效的，只不过上边的命令更加简洁
+$ asciidoctor -r asciidoctor-pdf -b pdf basic-example.adoc
+....
+
+这里需要说明一下，如果文档中包含中文，初次转换的时候会出现乱码的问题。解决方式请看 link:id_中文乱码问题[中文乱码问题] 章节。
+
+== 我是占位符
+后续新增内容区间
+
+== 问题
+
+=== 中文乱码问题
+
+如果文档中包含中文，初次转换的时候会出现乱码的问题。这里简单介绍下asciidoctor-pdf的默认主题。如果查阅了asciidoctor-pdf的帮助文档，就会知道他支持自定义主题的。中文乱码的原因也是由于默认主题中使用了非中文字体导致的，需要添加中文字体。这里有两种解决方式可供选择：
+
+- 创建项目/用户主题
+
+项目和用户的创建方式一样，不同的是二者存储的位置不一样，用户的存储在一个固定文件夹，比如``~/.config/adoc``, 只要使用命令生成的时候填写了正确的路径即可。
+
+====
+- 在adoc所在文件下新建 icon:folder[] fonts文件夹，将中文字体复制到 icon:folder[] fonts文件夹中
+- 复制asciidoctor-pdf安装目录中的 icon:file[] ``data/themes/default-theme.yml``到当前目录，或者新建一个 icon:file[] theme.yml
+- 编辑修改``default-theme.yml``内容，主要节点：
+....
+font:
+  catalog:
+    song: # 宋体，请保证fonts文件中包含如下字体
+      normal: STSONG.TTF
+      bold: STSONG.TTF
+      italic: STSONG.TTF
+      bold_italic: STSONG.TTF
+  base:  
+    # 设置字体
+    font_family: song
+literal:
+  font_family: song
+....
+- 生成pdf
+....
+$ asciidoctor-pdf -a pdf-style=default-theme.yml -a pdf-fontsdir=fonts test.adoc
+....
+====
+
+- 默认主题
+
+查看icon:file[]``../bin/asciidoctor-pdf``源码，看到他实际使用的是 icon:file[] ``../../lib/asciidoctor/pdf.rb``，我们再查看下这个ruby文件，发现这个又重新定位到 icon:folder[] ``../asciidoctor-pdf``文件夹，即icon:folder[] ``../lib/asciidoctor-pdf``，其中包含了 icon:file[] ``theme_loader.rb``，继续查看这个文件，阅读源码之后，发现默认会先加载主题 icon:file[] ``data\themes\base-theme.yml``，如果这个不存在会加载``data\themes\default-theme.yml``，也就是说``base-theme.yml``的优先级比``default-theme.yml``高，我们需要更改``base-theme.yml``内容。主要修改内容同 ##创建项目/用户主题## 章节是一样的。修改完成之后，此后只需要执行:
+
+....
+$ asciidoctor-pdf test.adoc
+....
+
+或者我们可以修改``default-theme.yml``，或者创建自己的主题文件，此后生成需要指明主题文件：
+
+....
+$ asciidoctor-pdf -a pdf-style=default-theme.yml test.adoc
+....
+
+如果以上两种解决方法不合你心意，那你可以参考下 link:https://github.com/chloerei/asciidoctor-pdf-cjk-kai_gen_gothic[asciidoctor-pdf-cjk-kai_gen_gothic] 这个项目，这是一个asciidoc-pdf的主题项目，主要用于支持CJK footnote:[中日韩统一表意文字（CJK Unified Ideographs）] ，支持中文简体、繁体、韩语、日语等。
