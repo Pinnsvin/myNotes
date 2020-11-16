@@ -10,6 +10,37 @@ v 1.0
 sudo apt-get update && sudo apt-get upgrade && sudo apt autoremove -y
 ....
 
+== 系统硬件
+
+=== 显卡驱动
+
+- NVIDIA显卡驱动，一条命令即可。
+....
+sudo apt install nvidia-settings
+....
+
+- AMD显卡驱动
+....
+sudo apt install firmware-linux firmware-linux-nonfree libdrm-amdgpu-amdgpu1 xserver-xorg-video-amdgpu 
+....
+
+=== 网卡驱动
+
+- 无线WiFi驱动(Intel)
+....
+sudo apt install firmware-iwlwifi 
+....
+
+=== 硬盘
+- 开机自动挂载硬盘
+
+自动挂载硬盘的配置文件位置为``/etc/fstab``
+
+....
+sudo vim /etc/fstab
+....
+
+
 == 删除系统自带软件
 
 - amazon
@@ -20,6 +51,27 @@ sudo apt autoremove --purge unity-webapps-common && sudo rm -rf /usr/share/appli
 ....
 
 - 游戏们
+
+以下游戏统计于debian bullseye 版本
+
+|===
+|游戏名称 | 软件包
+
+|俄罗斯方块	| quadrapassel
+|关灯	| lightsoff
+|连珠消球	| five-or-more
+|四子连线	| four-in-a-row 
+|贪吃蛇	| gnome-nibbles
+|消色块	| swell-foop
+|掷骰子	| tali
+|GNOME 国际象棋	| gnome-chess
+|GNOME 黑白棋	| iagno
+|GNOME 华容道	| gnome-klotski
+|GNOME 机器人	| gnome-robots
+|GNOME 四邻	| gnome-tetravex
+|GNOME 推盘	| gnome-taquin
+|GNOMR Hitori	| hitori
+|===
 
 ....
 sudo apt autoremove --purge aisleriot gnome-mines gnome-sudoku gnome-mahjongg -y
@@ -47,6 +99,12 @@ sudo apt autoremove --purge aisleriot gnome-mines gnome-sudoku gnome-mahjongg li
 sudo apt autoremove --purge kasumi gnome-taquin gnome-klotski gnome-tetravex gnome-chess gnome-mines gnome-sudoku gnome-robots gnome-nibbles gnome-mahjongg hitori mlterm* rhythmbox* scim* xiterm+thai xterm quadrapassel lightsoff four-in-a-row tali swell-foop five-or-more  hdate-applet mozc-*  gnome-dictionary  evolution icedove-l10n-ja  imagemagick inkscape libreoffice* aisleriot  khmerconverter -y
 ....
 
+debian bullseye 版本使用下边命令一键卸载所有游戏
+
+....
+sudo apt autoremove quadrapassel gnome-maps lightsoff five-or-more four-in-a-row gnome-nibbles swell-foop gnome-chess iagno gnome-klotski gnome-robots gnome-tetravex hitori gnome-taquin tali
+....
+
 == 一般设置
 
 - home下的文件夹名称修改为英文
@@ -72,12 +130,42 @@ username	ALL=(ALL:ALL) ALL
 - TAB不能自动补全
 ====
 ....
-sudo apt-get install bash_completion -y
+sudo apt-get install bash-completion -y
 ....
-注销重新登录。
+
+修改 ``/etc/bash.bashrc`` 内容。如下内容取消注释。
+....
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+....
+即时生效
+....
+source /etc/bash.bashrc
+....
+
 ====
 
 == 桌面设置
+- 4k显示器缩放调整
+
+由于gnome默认只有100%，200%，300%等选项，但是我想调整到125%。进行如下操作：
+
+安装dconf gnome图形化配置工具
+....
+sudo apt-get install dconf-editor
+....
+打开dconf，定位到 org/gnome/mutter/experimental-features，编辑该项如下图： 
+
+image::dconf1.png[]
+
+然后打开设置->显示器进行选择即可
+
+image::settings-display.png[]
 
 - gnome-tweak-tool 
 ....
@@ -162,7 +250,13 @@ sudo apt-get install libqt4-declarative # 执行sogou-qimpanel显示缺libqtdecl
 
 安装完成后可能会出现，不能切换输入法的情况，安装``fcitx-ui-classic``之后就可以了。
 
-缺失依赖，提示用``sudo apt --fix-broken install``修复，修复之后卸载重新安装，期间可能在fcitx配置输入法列表里没有**搜狗输入法**，重启下系统，没试过注销。
+- 缺失依赖，提示用``sudo apt --fix-broken install``修复，修复之后卸载重新安装，期间可能在fcitx配置输入法列表里没有**搜狗输入法**，重启下系统，没试过注销。
+
+- 安装搜狗输入法后fcitx 配置中输入法栏空白修复：
+
+1. 找到应用 输入法 或者 终端输入 im-config
+2. 选择fcitx
+3. 重启系统即可
 
 搜狗皮肤推荐 https://pinyin.sogou.com/skins/detail/view/info/513927?rf=cate_31_sign&tf=w:[【竹子】win10_blue]， 安装之后由于候选词底纹会出现候选词亮度太低，可以在搜狗中设置下：设置--外观--皮肤设置--更换颜色--下拉选择FirstCandColor，颜色设置为黑色就可以了。
 
@@ -179,7 +273,7 @@ sudo apt autoremove --purge ibus -y
 - flameshot
 
 ====
-该软件在github上开源，目前收录在ubuntu18.04和debian10软件包中，与Snipaste类似，不过Snipaste目前linux版本还没有发布，就用这个。
+该软件在github上开源，目前收录在ubuntu18.04和debian10软件包中，与Snipaste类似，不过Snipaste目前linux版本还没有发布，就用这个。高分辨率显示器截图的时候可能会出现截图窗口自动放大的bug，关于该问题可以去GitHub项目issues里看看，有一种脚本解决方案，但是在我显示器上不生效。
 
 截图命令``flameshot gui``，通过设置快捷键也可以像snipaste一样方便截图。
 
@@ -268,14 +362,6 @@ sudo apt-get install freeplane -y
 . docker-qq
 . 
 ====
-
-== 系统硬件
-
-NVIDIA显卡驱动，一条命令即可。
-
-....
-sudo apt install nvidia-settings
-....
 
 == 开发环境及工具
 
