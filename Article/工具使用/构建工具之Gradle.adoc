@@ -1,0 +1,37 @@
+= 构建工具之Gradle
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate}
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: images
+// enable font awesome
+:icons: font
+// enable UI
+:experimental:
+:source-highlighter: coderay
+
+== icon:download[] 安装
+
+icon:link[role="blue"] 下载地址::
+https://gradle.org/releases
+
+icon:folder-open[role="red"] 解压::
+[source,bash,attributes]
+----
+unzip -d /opt/ gradle-6.7.1-bin.zip
+----
+
+== icon:cog[] 配置
+
+配置环境变量，编辑 `{tilde}/.profile`, 添加如下内容::
+[source,bash,attributes]
+----
+export GRADLE_HOME=/opt/gradle-6.7.1
+export PATH=$GRADLE_HOME/bin:$PATH
+----
+
+== icon:terminal[] 命令
+
+

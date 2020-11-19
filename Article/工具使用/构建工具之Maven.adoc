@@ -1,0 +1,55 @@
+= 构建工具之Maven
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate}
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: images
+// enable font awesome
+:icons: font
+// enable UI
+:experimental:
+:source-highlighter: coderay
+
+== icon:download[] 安装
+
+icon:link[role="blue"] 下载地址::
+http://maven.apache.org/download.cgi
+
+icon:folder-open[role="red"] 解压::
+[source,bash,attributes]
+----
+sudo tar xf apache-maven-3.6.3-bin.tar.gz -C /opt/
+----
+
+== icon:cog[] 配置
+    确保已经配置了环境变量 `JAVA_HOME`. 这里特别说明一下，`MAVEN_HOME` 是maven1时的写法，`M2_HOME` 是maven2时的写法，maven3之间将路径添加到 `PATH` 变量中。我习惯如下配置：
+
+配置环境变量，编辑 `{tilde}/.profile`, 添加如下内容::
+[source,bash,attributes]
+----
+export MAVEN_HOME=/opt/apache-maven-3.6.3
+export PATH=$MAVEN_HOME/bin:$PATH
+----
+
+配置阿里镜像，编辑 `$MAVEN_HOME/conf/settings.xml`, 在``<mirrors></mirrors>``中添加如下内容::
+[source,xml,attributes]
+----
+<mirrors>
+    <mirror>
+        <id>aliyunmaven</id>
+        <mirrorOf>*</mirrorOf>
+        <name>阿里云公共仓库</name>
+        <url>https://maven.aliyun.com/repository/public</url>
+    </mirror>
+</mirrors>
+----
+
+更改本地仓库存储位置，编辑 `$MAVEN_HOME/conf/settings.xml`::
+[source,xml,attributes]
+----
+<localRepository>~/.m2/repository</localRepository>
+----
+
+== icon:terminal[] 命令

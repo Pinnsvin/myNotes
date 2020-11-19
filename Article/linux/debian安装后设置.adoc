@@ -3,42 +3,60 @@ Pinnsvin
 v 1.0
 :imagesdir: static/image
 
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: images
+// enable font awesome
+:icons: font
+// enable UI
+:experimental:
+:source-highlighter: coderay
+
 == 更新系统
 
 更新系统 + 移除无用软件包。
-....
+[source,bash,attributes]
+----
 sudo apt-get update && sudo apt-get upgrade && sudo apt autoremove -y
-....
+----
 
 == 系统硬件
 
 === 显卡驱动
 
 - NVIDIA显卡驱动，一条命令即可。
-....
+
+[source,bash,attributes]
+----
 sudo apt install nvidia-settings
-....
+----
 
 - AMD显卡驱动
-....
+
+[source,bash,attributes]
+----
 sudo apt install firmware-linux firmware-linux-nonfree libdrm-amdgpu-amdgpu1 xserver-xorg-video-amdgpu 
-....
+----
 
 === 网卡驱动
 
 - 无线WiFi驱动(Intel)
-....
+
+[source,bash,attributes]
+----
 sudo apt install firmware-iwlwifi 
-....
+----
 
 === 硬盘
 - 开机自动挂载硬盘
 
 自动挂载硬盘的配置文件位置为``/etc/fstab``
 
-....
+[source,bash,attributes]
+----
 sudo vim /etc/fstab
-....
+----
 
 
 == 删除系统自带软件
@@ -46,9 +64,11 @@ sudo vim /etc/fstab
 - amazon
 
 最小安装不包含``unity-webapps-common``包。##貌似没用，还是去软件中心手动删除。##
-....
+
+[source,bash,attributes]
+----
 sudo apt autoremove --purge unity-webapps-common && sudo rm -rf /usr/share/applications/ubuntu-amazon-default.desktop
-....
+----
 
 - 游戏们
 
@@ -73,68 +93,80 @@ sudo apt autoremove --purge unity-webapps-common && sudo rm -rf /usr/share/appli
 |GNOMR Hitori	| hitori
 |===
 
-....
+[source,bash,attributes]
+----
 sudo apt autoremove --purge aisleriot gnome-mines gnome-sudoku gnome-mahjongg -y
-....
+----
 
 - libreoffice
 
-....
+[source,bash,attributes]
+----
 sudo apt autoremove --purge libreoffice* -y
-....
+----
 
 - rhythmbox
-....
+
+[source,bash,attributes]
+----
 sudo apt autoremove --purge rhythmbox -y
-....
+----
 
 === 汇总命令
 
-....
+[source,bash,attributes]
+----
 sudo apt autoremove --purge aisleriot gnome-mines gnome-sudoku gnome-mahjongg libreoffice* rhythmbox -y 
-....
+----
 
-
-....
+[source,bash,attributes]
+----
 sudo apt autoremove --purge kasumi gnome-taquin gnome-klotski gnome-tetravex gnome-chess gnome-mines gnome-sudoku gnome-robots gnome-nibbles gnome-mahjongg hitori mlterm* rhythmbox* scim* xiterm+thai xterm quadrapassel lightsoff four-in-a-row tali swell-foop five-or-more  hdate-applet mozc-*  gnome-dictionary  evolution icedove-l10n-ja  imagemagick inkscape libreoffice* aisleriot  khmerconverter -y
-....
+----
 
 debian bullseye 版本使用下边命令一键卸载所有游戏
 
-....
+[source,bash,attributes]
+----
 sudo apt autoremove quadrapassel gnome-maps lightsoff five-or-more four-in-a-row gnome-nibbles swell-foop gnome-chess iagno gnome-klotski gnome-robots gnome-tetravex hitori gnome-taquin tali
-....
+----
 
 == 一般设置
 
 - home下的文件夹名称修改为英文
 
-====
-只能修改为系统默认的（首字母大写），想改小写需要修改``~/.config/user-dirs.dirs``文件内容。
-....
+只能修改为系统默认的（首字母大写），想改小写需要修改``{tilde}/.config/user-dirs.dirs``文件内容。
+
+[source,bash,attributes]
+----
 export LANG=en_US
 xdg-user-dirs-gtk-update
-....
-====
+----
 
 - sudo 不在sudoers文件中
-====
+
+[source,bash,attributes]
+----
+# gedit /ect/sudoers
+----
 在``/etc/sudoers``文件中``root``行下增加一行。
 
-# gedit /ect/sudoers
-....
+[source,bash,attributes]
+----
 username	ALL=(ALL:ALL) ALL
-....
-====
+----
 
 - TAB不能自动补全
-====
-....
+
+[source,bash,attributes]
+----
 sudo apt-get install bash-completion -y
-....
+----
 
 修改 ``/etc/bash.bashrc`` 内容。如下内容取消注释。
-....
+
+[source,bash,attributes]
+----
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -142,23 +174,26 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-....
+----
 即时生效
-....
-source /etc/bash.bashrc
-....
 
-====
+[source,bash,attributes]
+----
+source /etc/bash.bashrc
+----
 
 == 桌面设置
+
 - 4k显示器缩放调整
 
 由于gnome默认只有100%，200%，300%等选项，但是我想调整到125%。进行如下操作：
 
 安装dconf gnome图形化配置工具
-....
+
+[source,bash,attributes]
+----
 sudo apt-get install dconf-editor
-....
+----
 打开dconf，定位到 org/gnome/mutter/experimental-features，编辑该项如下图： 
 
 image::dconf1.png[]
@@ -168,15 +203,18 @@ image::dconf1.png[]
 image::settings-display.png[]
 
 - gnome-tweak-tool 
-....
+
+[source,bash,attributes]
+----
 sudo apt-get install gnome-tweak-tool  -y
-....
+----
 
 访问 https://extensions.gnome.org[gnome 拓展] 网站，提示下载浏览器插件，Firefox安装完插件之后，系统安装``chrome-gnome-shell``
 
-....
+[source,bash,attributes]
+----
 sudo apt-get install chrome-gnome-shell -y
-....
+----
 
 推荐下边这些插件，之前在debian上用，还有一些安装失败。
 
@@ -219,34 +257,36 @@ _gnome3.2之后没有gnome-shell.css文件了，所以我没有调整图标大�
 
 编辑``gnome-shell/gnome-shell.css``，搜索 ##icon-grid##，编辑如下的内容：
 
-....
+[source,bash,attributes]
+----
 /* App Vault/Grid */
 .icon-grid {
   spacing: 30px;
   -shell-grid-horizontal-item-size: 136px; // 水平间距
   -shell-grid-vertical-item-size: 136px; // 垂直间距
-  }
-  .icon-grid .overview-icon {
-    icon-size: 96px; // 图标大小
-    }
-....
+}
+.icon-grid .overview-icon {
+  icon-size: 96px; // 图标大小
+}
+----
 
 
 == 常用软件
 
 - 搜狗输入法
 
-====
 需要安装fcitx。
-....
+
+[source,bash,attributes]
+----
 sudo apt-get install fcitx fcitx-table -y
-....
+----
 
-....
+[source,bash,attributes]
+----
 sudo dpkg -i sogou*.deb -y
-
 sudo apt-get install libqt4-declarative # 执行sogou-qimpanel显示缺libqtdeclarative.so.4 no such file，安装这个
-....
+----
 
 安装完成后可能会出现，不能切换输入法的情况，安装``fcitx-ui-classic``之后就可以了。
 
@@ -265,124 +305,150 @@ https://pinyin.sogou.com/skins/detail/view/info/608391?rf=cate_31_sign&tf=p[mac�
 image::201909282106.png[]
 
 这样我就不需要自带的ibus输入法了，卸载了。
-....
+
+[source,bash,attributes]
+----
 sudo apt autoremove --purge ibus -y
-....
-====
+----
 
 - flameshot
 
-====
 该软件在github上开源，目前收录在ubuntu18.04和debian10软件包中，与Snipaste类似，不过Snipaste目前linux版本还没有发布，就用这个。高分辨率显示器截图的时候可能会出现截图窗口自动放大的bug，关于该问题可以去GitHub项目issues里看看，有一种脚本解决方案，但是在我显示器上不生效。
 
 截图命令``flameshot gui``，通过设置快捷键也可以像snipaste一样方便截图。
 
-....
+[source,bash,attributes]
+----
 sudo apt-get install flameshot -y
-....
-====
+----
 
 - qbittorrent
 
-====
-....
+[source,bash,attributes]
+----
 sudo apt-get install qbittorrent -y
-....
+----
 
 添加tracker
 
 link:https://github.com/ngosang/trackerslist[tackerslist] 上收录了一些好用的tracker列表，长期更新，通过配置tracker，有些资源的下载速度比迅雷快很多。
 
 工具-首选项-bittorrent 最下方勾选“自动添加以下trackers”到新的torrent。填写github上复制的连接即可。
-====
 
 - thunderbird
 
-====
-....
+[source,bash,attributes]
+----
 sudo apt-get install thunderbird thunderbird-l10n-zh-cn -y
-....
-====
+----
 
 - chromium 
 
-====
-chrome 太占内存了，试试chromium，想要同步google账户，需要在设置里勾选**允许登录 Chromium**
+chrome 太占内存了，试试chromium，想要同步google账户，需要在设置里勾选 ** 允许登录 Chromium **
 
-....
+[source,bash,attributes]
+----
 sudo apt-get install chromium chromium-l10n -y
-....
-====
+----
 
 - vlc
 
-====
-....
+[source,bash,attributes]
+----
 sudo apt-get install vlc -y
-....
-====
+----
 
 - 深度录屏
 
-====
 debian10 的官方包里包含deepin的几款软件，可以在软件中心里去下载。
 
-....
+[source,bash,attributes]
+----
 sudo apt-get install deepin-screen-recorder -y
-....
-====
+----
 
 - nomacs 
 
-====
 图片查看，简单编辑，类似windows上的画图软件，满足基本的图片修改。
 
-....
+[source,bash,attributes]
+----
 sudo apt-get install nomacs -y
-....
-====
+----
 
 - freeplane
 
-====
 思维导图工具。
 
-....
+[source,bash,attributes]
+----
 sudo apt-get install freeplane -y
-....
-====
+----
 
 - 其他软件
 
-====
 . electron-ssr ssr代理工具
+（在debian bullseye版本中默认使用了python3，需要配置``sudo ln -s /usr/bin/python3 /usr/bin/python``解决1080端口占用问题）
 . wps
 . 网易云音乐
 . docker-wechat
 . docker-qq
-. 
-====
+
 
 == 开发环境及工具
 
-- vscode
+link:../工具使用/构建工具之Maven.adoc[构建工具之Maven]
 
-- openjdk
-====
-debian10 软件仓库的jdk版本为openjdk-11，并且不提供其他版本下载，如果需要其他版本需要手动下载或者使用``adoptopenjdk``，推荐使用adoptopenjdk提供的二进制包安装，后续切换管理jdk版本的时候比较方便。adoptopenjdk官方源在国内使用移动宽带可能会龟速，直接下载二进制包手动安装即可。
+link:../工具使用/构建工具之Gradle.adoc[构建工具之Gradle]
 
+link:../编程语言/nodejs/nodejs.adoc[nodejs]
 
-====
+=== vscode
 
+=== openjdk
+  debian10 软件仓库的jdk版本为openjdk-11，并且不提供其他版本下载，如果需要其他版本需要手动下载或者使用``adoptopenjdk``，推荐使用adoptopenjdk提供的二进制包安装，后续切换管理jdk版本的时候比较方便。adoptopenjdk官方源在国内使用移动宽带可能会龟速，直接下载二进制包手动安装即可。
 
-- StarUml
-====
-破解：
+**配置apt源，使用apt下载**
+
+1.安装依赖 
+[source,bash,attributes]
+----
+sudo apt-get install wget apt-transport-https gnupg -y
+----
+
+2.导入GPG公钥
+[source,bash,attributes]
+----
+wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
+----
+
+3.添加源，我们这里把官方源换成清华的源
+
+``<codename> ``是你的系统版本号，adoptopenjdk目前尚未支持bullseye版本
+[source,bash,attributes]
+----
+# 官方源
+echo "deb https://adoptopenjdk.jfrog.io/adoptopenjdk/deb <codename> main" | sudo tee /etc/apt/sources.list.d/adoptopenjdk.list
+# 清华源
+echo "http://mirrors.tuna.tsinghua.edu.cn/AdoptOpenJDK/deb <codename> main" | sudo tee /etc/apt/sources.list.d/adoptopenjdk.list
+----
+
+4.更新源及下载
+[source,bash,attributes]
+----
+sudo apt-get update
+
+----
+
+=== StarUml
+破解:
 
 1 安装nodejs ``sudo apt-get install nodejs``
 
 2 安装yarn 
-....
+
+[source,bash,attributes]
+----
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update && sudo apt-get install yarn
@@ -391,31 +457,35 @@ sudo apt-get update && sudo apt-get install yarn
 export PATH="$PATH:/opt/yarn-[version]/bin"
 export PATH="$PATH:`yarn global bin`"
 source ~/.profile
-....
+----
 
 3 安装asar
 
-....
+[source,bash,attributes]
+----
 sudo yarn global add asar
-....
+----
 
 4 解压StarUml
 
-....
+[source,bash,attributes]
+----
 chmod +x StarUML-3.1.0-x86_64.AppImage
 ./StarUML-3.1.0-x86_64.AppImage --appimage-extract
-....
+----
 
 5 解压授权文件
 
-....
+[source,bash,attributes]
+----
 cd squashfs-root/resources/
 asar extract app.asar app
-....
+----
 
 6 修改授权文件
 
-....
+[source,bash,attributes]
+----
 vim app/src/engine/license-manager.js
 
 checkLicenseValidity () {
@@ -429,23 +499,25 @@ checkLicenseValidity () {
       setStatus(this, true)
     })
   }
-....
+----
 
 7 打包授权文件
 
-....
+[source,bash,attributes]
+----
 asar pack app app.asar
-....
+----
 
 8 打包appleimage
 
-....
+[source,bash,attributes]
+----
 cd ~/Programe/AppImageKit
 wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
 chmod a+x appimagetool-x86_64.AppImage
 
 ./appimagetool-x86_64.AppImage squashfs-root 
-....
+----
 
 启动报错：
 
@@ -453,45 +525,39 @@ The SUID sandbox helper binary was found, but is not configured correctly. Rathe
 
 修复：
 
-....
+[source,bash,attributes]
+----
 sudo sysctl kernel.unprivileged_userns_clone=1
-....
-====
+----
+<<<
 
-- mariaDB
+=== mariaDB
 
-====
 安装之后默认没有密码，但是需要使用root权限去登录。普通用户登录会出现鉴权不通过的错误。可通过设置root密码，普通用户再去登录，或者创建一个普通用户的账户。
 
-[source,bash]
-....
+[source,bash,attributes]
+----
 sudo apt-get install mariadb-server
 
 sudo systemctl start mariadb 
-....
-====
+----
 
-- openSystemArchitect
+=== openSystemArchitect
+  数据库设计软件
 
-====
-数据库设计软件。
-
-[source,bash]
-....
+[source,bash,attributes]
+----
 wget https://www.codebydesign.com/SystemArchitect/downloads/SystemArchitect-4.0.1-linux-x86-64bit.tar.gz
 tar -xf SystemArchitect-4.0.1-linux-x86-64bit.tar.gz
 sudo apt-get install unixodbc -y
-....
-====
+----
 
-- dbeaver
+=== dbeaver
 
-====
-DBMS
+  DBMS
 
-[source,bash]
-....
+[source,bash,attributes]
+----
 wget https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
 sudo dpkg -i dbeaver-ce_latest_amd64.deb
-....
-====
+----

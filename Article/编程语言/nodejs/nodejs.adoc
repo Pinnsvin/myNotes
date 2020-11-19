@@ -1,0 +1,61 @@
+= Nodejs
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate}
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: images
+// enable font awesome
+:icons: font
+// enable UI
+:experimental:
+:source-highlighter: coderay
+
+== icon:download[] 安装
+
+icon:link[role="blue"] 下载地址::
+https://nodejs.org/en/download/
+
+icon:folder-open[role="red"] 解压::
+[source,bash,attributes]
+----
+sudo tar xf node-v14.15.1-linux-x64.tar.xz -C /opt/
+----
+
+== icon:cog[] 配置
+
+配置环境变量::
+编辑 `{tilde}/.profile` ， 添加如下内容：
+[source,bash,attributes]
+----
+export NODE_HOME=/opt/node-v14.15.1-linux-x64
+export PATH=$HODE_HOME/bin:$PATH
+----
+
+配置淘宝镜像::
+[source,bash,attributes]
+----
+npm config set registry https://registry.npm.taobao.org
+----
+
+== icon:terminal[] 命令
+=== config
+
+[clos="2,5a"]
+|===
+|命令 | 释义
+
+|`npm config set <key> <value>` | 根据键值对添加设置
+|`npm config get [<key>]` | 根据key获取设置
+|`npm config delete <key>` | 根据key删除设置
+|`npm config list [--json]` | 获取所有设置
+|`npm config edit` | 编辑配置文件
+|`npm set <key> <value>` | 与 `npm config set <key> <value>` 作用一样
+|`npm get [<key>]` | 与 `npm config get [<key>]` 作用一样
+|===
+
+其中 `config` 可以简写为 `c`， 例如：`npm config list` 可以简写为 `npm c list`。
+
+
+
