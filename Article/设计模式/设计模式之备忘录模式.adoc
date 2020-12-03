@@ -1,0 +1,8 @@
+== 设计模式之备忘录模式
+
+=== 定义
+IMPORTANT: 
+
+=== UML
+[plantuml, diagram-classes, png]
+
