@@ -1,0 +1,67 @@
+== TypeScript
+Pinnsvin <Pinnsvin@163.com>
+v1.0 {docdate}
+
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:toc: 
+:doctype: article
+:imagesdir: images
+// enable font awesome
+:icons: font
+// enable UI
+:experimental:
+:source-highlighter: coderay
+
+=== icon:download[] 安装
+
+[source,bash,attributes]
+----
+npm install typescript -g
+tsc --version # 查看版本
+----
+
+=== Hello World!
+
+- 新建``Hello.ts``文件，内容如下::
+[source,typescript,attributes]
+----
+function hello() {
+    let hello: string = "Hello World!"
+    console.log(hello)
+}
+hello()
+----
+- 编译（转js）::
+[source,bash,attributes]
+----
+tsc Hello.ts
+node Hello
+----
+.console output
+----
+Hello World!
+----
+
+=== 插件
+
+==== ts-node
+    自动编译（转js）并运行。
+
+- 安装::
+[source,bash,attributes]
+----
+npm install -g ts-node
+----
+
+- 使用::
+[source,bash,attributes]
+----
+ts-node Hello.ts
+----
+.console output
+----
+Hello World!
+----
+
+
+

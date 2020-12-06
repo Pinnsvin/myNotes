@@ -533,7 +533,7 @@ sudo sysctl kernel.unprivileged_userns_clone=1
 
 === mariaDB
 
-安装之后默认没有密码，但是需要使用root权限去登录。普通用户登录会出现鉴权不通过的错误。可通过设置root密码，普通用户再去登录，或者创建一个普通用户的账户。
+  安装之后默认没有密码，但是需要使用root权限去登录。普通用户登录会出现鉴权不通过的错误。可通过设置root密码，普通用户再去登录，或者创建一个普通用户的账户。
 
 [source,bash,attributes]
 ----
@@ -541,6 +541,92 @@ sudo apt-get install mariadb-server
 
 sudo systemctl start mariadb 
 ----
+
+==== 配置
+准备语句::
+[source,sql,attributes]
+----
+-- 修改密码语句
+-- 1
+update mysql.user set password=password('root') where user='root';
+-- 2
+alter user root identified by 'root';
+-- 3
+set password for 'root'@'localhost' = password('root');
+
+-- 创建用户语句
+-- 无密码创建用户
+create user 'username'@'host';
+
+create user 'test'@'%';
+
+-- 使用明文密码创建用户
+create user 'username'@'host' identified by 'password';
+
+create user 'test'@'%' identified by 'test';
+
+-- 使用加密密码创建用户, 先获取密码
+select password('test');
+create user 'test'@'%' identified by password '*94BDCEBE19083CE2A1F959FD02F964C7AF4CFC29';
+
+-- 授权语句
+-- 语法 with grant option 表明该用户可以给其他用户授权已有权限
+grant privileges on databasename.tablename to 'username'@'host' [with grant option];
+grant all on *.* to 'test'@'%';
+grant select, update on mysql.user to 'test'@'%';
+-- 刷新授权
+flush privileges;
+
+-- 删除用户
+drop user 'username'@'host';
+----
+
+使用'mysql_secure_installation' 命令初始化mariadb::
+[source,bash,attributes]
+----
+sudo mysql_secure_installation
+----
+
+使用root权限登录mariadb::
+[source,bash,attributes]
+----
+sudo mysql -u root -p
+----
+
+查看用户基本信息::
+[source,sql,attributes]
+----
+select user, host, password, plugin from mysql.user;
+----
+.output
+[source,bash,attributes]
+----
+MariaDB [(none)]> select user, host, password, plugin from mysql.user;
++----------+-----------+-------------------------------------------+-------------+
+| user     | host      | password                                  | plugin      |
++----------+-----------+-------------------------------------------+-------------+
+| root     | localhost | *0DE90E0F40E30E783070E8EA75D425B1E9F42BE7 | unix_socket |
++----------+-----------+-------------------------------------------+-------------+
+2 rows in set (0.000 sec)
+----
+
+root用户使用了link:https://mariadb.com/kb/en/authentication-plugin-unix-socket/[unix_socket]管理用户登录。要使用密码登录，我们需要修改这一项内容为link:https://mariadb.com/kb/en/authentication-plugin-mysql_native_password/[mysql_native_password].
+
+修改登录方式和密码::
+[source,sql,attributes]
+----
+update mysql.user set authentication_string=password('root'), plugin = 'mysql_native_password' where user = 'root';
+flush privileges;
+----
+
+或者直接创建一个新用户::
+[source,sql,attributes]
+----
+create user 'test'@'%' identified by 'test';
+grant all on *.* to 'test'@'%';
+flush privileges;
+----
+
 
 === openSystemArchitect
   数据库设计软件

@@ -25,12 +25,20 @@ sudo tar xf node-v14.15.1-linux-x64.tar.xz -C /opt/
 
 == icon:cog[] 配置
 
+配置本地全局安装路径::
+[source,bash,attributes]
+----
+npm config set prefix ~/node/node_global
+npm config set cache ~/node/node_cache
+----
+
 配置环境变量::
 编辑 `{tilde}/.profile` ， 添加如下内容：
 [source,bash,attributes]
 ----
 export NODE_HOME=/opt/node-v14.15.1-linux-x64
-export PATH=$HODE_HOME/bin:$PATH
+export NODE_GLOBAL=~/node/node_global
+export PATH=$HODE_HOME/bin:$NODE_GLOBAL/bin:$PATH
 ----
 
 配置淘宝镜像::

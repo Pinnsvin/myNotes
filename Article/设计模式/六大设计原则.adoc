@@ -1,33 +1,17 @@
-= 设计模式: 六大设计原则
-Pinnsvin <Pinnsvin@163.com>
-v 1.0
-:plantuml-server-url: https://www.plantuml.com/plantuml
-:doctype: article
-// this value are auto(default), left, right
-:toc: 
-// add font-awesome
-:icons: font
-// cannel noheader default is off
-// :noheader:
-// cannel footer
-:nofooter:
-// paths
-:imagesdir: ./images
-:iconsdir: ./icons
-// :stylesdir: ./styles
-// {doctitle} {author} {firstname} {lastname} {middlename} {authorinitials}姓名缩写, {email}
+== 设计模式: 六大设计原则
 
-== 开闭原则
+=== 开闭原则
 
 IMPORTANT: *开闭原则* 的英文名称是。其定义是：
 
-== 单一职责原则
+=== 单一职责原则
 
 IMPORTANT: **单一职责原则**的英文名称是Single Responsibility Principle，简称是SRP。其定义： 应该**有且仅有一个原因引起类的变更**。
 
-=== 例子
+==== 例子
 [plantuml, diagram-classes, png]
 ....
+@startuml
 interface IConnectionManager{
     public void dial(String phoneNumber);
     public void hangup();
@@ -42,9 +26,10 @@ class Phone
 IDataTransfer ..> IConnectionManager
 Phone ..^ IConnectionManager
 Phone ..^ IDataTransfer
+@enduml
 ....
 
-=== 优点
+==== 优点
 
 - 类的复杂性降低，实现什么职责都有清晰明确的定义；
 - 可读性提高，复杂性降低，那当然可读性提高了；
@@ -53,10 +38,10 @@ Phone ..^ IDataTransfer
 
 
 
-== 里氏替换原则
+=== 里氏替换原则
 
-== 依赖倒置原则
+=== 依赖倒置原则
 
-== 接口隔离原则
+=== 接口隔离原则
 
-== 迪米特法则
+=== 迪米特法则
