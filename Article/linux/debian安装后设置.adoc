@@ -1,17 +1,30 @@
 = debian 安装后设置
-Pinnsvin
-v 1.0
-:imagesdir: static/image
-
+:author Pinnsvin
+:email: Pinnsvin@163.com
+:revnumber: v1.0
+:revdate: 2020-12-01
 :plantuml-server-url: https://www.plantuml.com/plantuml
-:toc: 
 :doctype: article
-:imagesdir: images
-// enable font awesome
+// this value are auto(default), left, right
+:toc: left
+:toc-title: 目录
+:toclevels: 3
+// add font-awesome
 :icons: font
 // enable UI
 :experimental:
-:source-highlighter: coderay
+// cannel noheader default is off
+// :noheader:
+// cannel footer
+:nofooter:
+// paths
+:imagesdir: ./images
+:iconsdir: ./icons
+// :stylesdir: ./styles
+:includedir: .
+:source-highlighter: highlightjs
+// {doctitle} {author} {firstname} {lastname} {middlename} {authorinitials}姓名缩写, {email}
+
 
 == 更新系统
 

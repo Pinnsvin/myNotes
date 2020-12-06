@@ -1,16 +1,30 @@
 == TypeScript
-Pinnsvin <Pinnsvin@163.com>
-v1.0 {docdate}
-
+:author Pinnsvin
+:email: Pinnsvin@163.com
+:revnumber: v1.0
+:revdate: {docdate}
 :plantuml-server-url: https://www.plantuml.com/plantuml
-:toc: 
 :doctype: article
-:imagesdir: images
-// enable font awesome
+// this value are auto(default), left, right
+:toc: left
+:toc-title: 目录
+:toclevels: 3
+// add font-awesome
 :icons: font
 // enable UI
 :experimental:
-:source-highlighter: coderay
+// cannel noheader default is off
+// :noheader:
+// cannel footer
+:nofooter:
+// paths
+:imagesdir: ./images
+:iconsdir: ./icons
+// :stylesdir: ./styles
+:includedir: .
+:source-highlighter: highlightjs
+// {doctitle} {author} {firstname} {lastname} {middlename} {authorinitials}姓名缩写, {email}
+
 
 === icon:download[] 安装
 
