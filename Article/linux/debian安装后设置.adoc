@@ -2,7 +2,7 @@
 :author Pinnsvin
 :email: Pinnsvin@163.com
 :revnumber: v1.0
-:revdate: 2020-12-01
+:revdate: {docdate}
 :plantuml-server-url: https://www.plantuml.com/plantuml
 :doctype: article
 // this value are auto(default), left, right

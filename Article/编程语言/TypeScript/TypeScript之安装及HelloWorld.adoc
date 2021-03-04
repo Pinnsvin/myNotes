@@ -1,0 +1,66 @@
+== TypeScript之安装及Hello World
+
+=== icon:download[] 安装
+
+==== 使用nodejs
+[source,bash,attributes]
+----
+npm install typescript -g
+tsc --version # 查看版本
+----
+
+==== 使用Deno
+Deno 原生支持TypeScript， 所以只需要下载本体即可。官网提供了脚本安装以及手动安装方式，自行选择。
+
+安装完成后查看版本：
+[source,bash,attributes]
+----
+deno --version # 查看版本
+deno run hello.ts # 执行脚本
+----
+
+=== Hello World!
+
+- 新建``Hello.ts``文件，内容如下::
+[source,typescript,attributes]
+----
+function hello() {
+    let hello: string = "Hello World!"
+    console.log(hello)
+}
+hello()
+----
+- 编译（转js）
+[source,bash,attributes]
+----
+tsc Hello.ts
+node Hello
+----
+.console output
+----
+Hello World!
+----
+
+=== 插件
+
+==== ts-node
+    自动编译（转js）并运行。
+
+- 安装
+[source,bash,attributes]
+----
+npm install -g ts-node
+----
+
+- 使用
+[source,bash,attributes]
+----
+ts-node Hello.ts
+----
+.console output
+----
+Hello World!
+----
+
+
+
