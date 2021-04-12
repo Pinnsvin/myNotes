@@ -1,0 +1,38 @@
+= Title
+:author: Pinnsvin
+:email: Pinnsvin@163.com
+:revnumber: v1.0
+:revdate: 2020-12-01
+:plantuml-server-url: https://www.plantuml.com/plantuml
+:doctype: article
+// this value are auto(default), left, right
+// :toc: left
+// 目录标题
+// :toc-title: 目录
+// 显示目录的最大级别
+// :toclevels: 2
+// ################## icon 相关 ##################
+// 添加 font-awesome 可选值image,font
+:icons: font
+// icon font cdn 默认为cdnjs.com
+:iconfont-remote: https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css
+// iconfont 名称，例如font-awesome、iconfont
+// :iconfont-name:
+// 使用cdn解决图标字体
+// :iconfont-remote:
+// icons为image时，图标目录，默认是imagedir 下的icons目录
+// :iconsdir:
+// icons为image时，图标类型，jpg\png\gif\svg
+// :icontype:
+// 图片目录
+:imagesdir: ./image
+
+// cannel noheader default is off
+// :noheader:
+// cannel footer
+:nofooter:
+// :stylesdir: ./styles
+:includedir: .
+:source-highlighter: highlightjs
+// {doctitle} {author} {firstname} {lastname} {middlename} {authorinitials}姓名缩写, {email}
+

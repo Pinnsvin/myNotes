@@ -1,0 +1,71 @@
+= Title
+:author: Pinnsvin
+:email: Pinnsvin@163.com
+:revnumber: v1.0
+:revdate: 2020-12-01
+:doctype: article
+:icons: font
+:nofooter:
+
+:hardbreaks:
+......
+Rubies are red,
+Topazes are blue.
+......
+
+[literal]
+error: The requested operation returned error: 1954 Forbidden search for defensive operations manual
+absolutely fatal: operation initiation lost in the dodecahedron of doom
+would you like to die again? y/n
+
+.AsciiDoc history
+****
+AsciiDoc was first released in Nov 2002 by Stuart Rackham.
+It was designed from the start to be a shorthand syntax
+for producing professional documents like DocBook and LaTeX.
+****
+
+____
+QuoteBlock
+____
+
+[quote, Abraham Lincoln, Address delivered at the dedication of the Cemetery at Gettysburg]
+____
+Four score and seven years ago our fathers brought forth
+on this continent a new nation...
+____
+
+[quote, Albert Einstein]
+A person who never made a mistake never tried anything new.
+
+____
+A person who never made a mistake never tried anything new.
+____
+
+[quote, Charles Lutwidge Dodgson, 'Mathematician and author, also known as http://en.wikipedia.org/wiki/Lewis_Carroll[Lewis Carroll]']
+____
+If you don't know where you are going, any road will get you there.
+____
+
+====
+ExampleBlock
+====
+
+--
+An open block can be an anonymous container,
+or it can masquerade as any other block.
+--
+
+[source]
+--
+puts "I'm a source block!"
+--
+
+first term:: definition of first term
+second term:: definition of second term
+
+[glossary]
+术语1::
+    解释1.
+术语2::
+    解释2.
